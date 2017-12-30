@@ -12,17 +12,18 @@ This was kind of a project for a hackthon: I was playing around with having a ra
 
 Original README from Adafruit:
 
-	Raspberry Pi & PiTFT-based RTL-SDR frequency scanning and display tool. See installation and usage instructions in the guide at:
+	Raspberry Pi & PiTFT-based RTL-SDR frequency scanning and display tool. 
+	See installation and usage instructions in the guide at:
 	https://learn.adafruit.com/freq-show-raspberry-pi-rtl-sdr-scanner/
 
 
 # Technical Stuff
 
 
-	- freqshow.py is my adaptation of FreqShow with no motion control stuff (interface and display changes mostly)
+- freqshow.py is my adaptation of FreqShow with no motion control stuff (interface and display changes mostly)
 
-	- testdemo.py is a visual debugger made by somebody else for connecting and viewing inputs from the myo armband
+- testdemo.py is a visual debugger made by somebody else for connecting and viewing inputs from the myo armband
 
-	- myo_raw.py is my conjunction of the 2, it places the code for drawing the screen of freqshow inside the code that gets the myo data and gives instructions to the model (updating the frequency) upon user hand gestures
+- myo_raw.py is my conjunction of the 2, it places the code for drawing the screen of freqshow inside the code that gets the myo data and gives instructions to the model (updating the frequency) upon user hand gestures
 
 
