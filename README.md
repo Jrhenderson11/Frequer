@@ -4,7 +4,7 @@ My personal adaptation of Adafruits Freqshow (https://github.com/adafruit/FreqSh
 This was kind of a project for a hackthon: I was playing around with having a radio controlled with motion control using a Myo arm thingy. This is why there are a bunch of files called Myo. Most of the time was spent trying to make a horrible frankensteins monster by joining the 2 pieces of software together (ie having a radio in pygame whilst maintaining a connection to, polling and recieving inputs from the controller). It was fairly succesful, I could change the frequency with a motion of my hand, but joining the 2 together made it crash quite a bit.
 
 
-# DISCLAIMER 
+## DISCLAIMER 
  (well at least I think this is a disclaimer)
 
  As said above this code (well some) was originally provided by adafruit for viewing software defined radio on a raspberry pi. At a hackathon I picked it apart to see what was what and played around with it, altering the interface and the way it provides data from the model to the interface and added motion control. But quite a lot of the code was not written by me, and I just changed the way it was presented and interacted with.
