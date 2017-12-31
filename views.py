@@ -593,8 +593,6 @@ class InstantSpectrogram(SpectrogramBase):
 		y = int(sum(self.avgslast) / (len(self.avgslast)))
 		pygame.draw.line(screen, freqshow.BUTTON_FG, (lastx,self.lasty) , ((self.model.width), y))
 
-		
-
 	def render_grid(self, screen):
 		bottom_row  = (self.buttons.row_size, self.model.height-self.buttons.row_size,self.model.width, self.model.height-self.buttons.row_size)
 		for x in range(0, self.model.width, (self.model.width / 10)):
