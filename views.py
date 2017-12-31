@@ -564,26 +564,16 @@ class InstantSpectrogram(SpectrogramBase):
 			pygame.draw.line(screen, freqshow.INSTANT_LINE, (i-1, ylast), (i, y))
 			ylast = y
 
-		#render overlay
 		
-
-
+		#render overlay
 		for x in range(0, self.model.width, (self.model.width / self.numpoints)):
 			#							update self.avgs
-			#(self.model.width / self.numpoints)
-			#self.avgs[(self.model.width / self.numpoints)] is list to check
-			#self.avgs[0] = self.avgs[1]
-	#		print len(self.avgs[x/(self.model.width / self.numpoints)])
-		
 			#shift down and append new to end
 			for x2 in range(len(self.avgs[x/(self.model.width / self.numpoints)])-1):
 				self.avgs[(x/(self.model.width / self.numpoints))][x2] = self.avgs[x/(self.model.width / self.numpoints)][x2+1]
 
 			self.avgs[x/(self.model.width / self.numpoints)][len(self.avgs[x/(self.model.width / self.numpoints)])-1] = freqs[x] 
-			print self.avgs[x/(self.model.width / self.numpoints)]
-#			raw_input()
-
-			#y = avg
+			
 			y = int(sum(self.avgs[x/(self.model.width / self.numpoints)]) / (len(self.avgs[x/(self.model.width / self.numpoints)])))
 		
 			pygame.draw.circle(screen, freqshow.BUTTON_FG, (x,y), 5, 0)
