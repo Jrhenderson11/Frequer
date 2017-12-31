@@ -26,4 +26,21 @@ Original README from Adafruit:
 
 - myo_raw.py is my conjunction of the 2, it places the code for drawing the screen of freqshow inside the code that gets the myo data and gives instructions to the model (updating the frequency) upon user hand gestures
 
+# Pictures!
+
+These just show the interface for freqshow that I created, I personally think it's quite nice
+
+![alt text](https://github.com/Jrhenderson11/Frequer/blob/master/res/multiview.png "multi-view")
+
+![alt text](https://github.com/Jrhenderson11/Frequer/blob/master/res/instantview.png "instant-view")
+
+![alt text](https://github.com/Jrhenderson11/Frequer/blob/master/res/waterfallview.png "waterfall-view")
+
+The arrow buttons adjust the frequency or amplitude
+
+
+
+
+
+
 
