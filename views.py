@@ -534,11 +534,14 @@ class InstantSpectrogram(SpectrogramBase):
 		self.numpoints = 10
 		self.lasty = (self.model.height / 2)
 		self.avgs = []
+		self.avgslast = []
+		memory = 20
 		for x in range(self.numpoints):
 			self.avgs.append([])
-			for x2 in range(20):
+			for x2 in range(memory):
 				self.avgs[x].append((self.model.height/4)*1)
-
+		for x2 in range(20):
+			self.avgslast.append((self.model.height/4)*1)
 	def render_spectrogram(self, screen):
 		# Grab spectrogram data.
 		freqs = self.model.get_data()
@@ -564,7 +567,7 @@ class InstantSpectrogram(SpectrogramBase):
 			pygame.draw.line(screen, freqshow.INSTANT_LINE, (i-1, ylast), (i, y))
 			ylast = y
 
-		
+		lastx = 0
 		#render overlay
 		for x in range(0, self.model.width, (self.model.width / self.numpoints)):
 			#							update self.avgs
@@ -580,6 +583,17 @@ class InstantSpectrogram(SpectrogramBase):
 			pygame.draw.line(screen, freqshow.BUTTON_FG, (x-(self.model.width / self.numpoints),self.lasty) , (x, y))
 		
 			self.lasty = y
+			lastx = x
+		#draw connection to end
+		#shift down and append new to end
+		for x2 in range(len(self.avgs[x/(self.model.width / self.numpoints)])-1):
+			self.avgslast[x2] = self.avgslast[x2+1]
+
+		self.avgslast[len(self.avgslast)-1] = freqs[len(freqs)-1]
+		y = int(sum(self.avgslast) / (len(self.avgslast)))
+		pygame.draw.line(screen, freqshow.BUTTON_FG, (lastx,self.lasty) , ((self.model.width), y))
+
+		
 
 	def render_grid(self, screen):
 		bottom_row  = (self.buttons.row_size, self.model.height-self.buttons.row_size,self.model.width, self.model.height-self.buttons.row_size)
