@@ -465,6 +465,7 @@ class SpectrogramBase(ViewBase):
 
 	def quit_accept(self):
 		sys.exit(0)
+	
 	def render_grid(self, screen):
 		return
 
@@ -530,6 +531,13 @@ class InstantSpectrogram(SpectrogramBase):
 	def __init__(self, model, controller):
 		super(InstantSpectrogram, self).__init__(model, controller)
 		self.screens = 1
+		self.numpoints = 10
+		self.lasty = (self.model.height / 2)
+		self.avgs = []
+		for x in range(self.numpoints):
+			self.avgs.append([])
+			for x2 in range(20):
+				self.avgs[x].append((self.model.height/4)*1)
 
 	def render_spectrogram(self, screen):
 		# Grab spectrogram data.
@@ -555,7 +563,34 @@ class InstantSpectrogram(SpectrogramBase):
 			y = freqs[i]
 			pygame.draw.line(screen, freqshow.INSTANT_LINE, (i-1, ylast), (i, y))
 			ylast = y
-	
+
+		#render overlay
+		
+
+
+		for x in range(0, self.model.width, (self.model.width / self.numpoints)):
+			#							update self.avgs
+			#(self.model.width / self.numpoints)
+			#self.avgs[(self.model.width / self.numpoints)] is list to check
+			#self.avgs[0] = self.avgs[1]
+	#		print len(self.avgs[x/(self.model.width / self.numpoints)])
+		
+			#shift down and append new to end
+			for x2 in range(len(self.avgs[x/(self.model.width / self.numpoints)])-1):
+				self.avgs[(x/(self.model.width / self.numpoints))][x2] = self.avgs[x/(self.model.width / self.numpoints)][x2+1]
+
+			self.avgs[x/(self.model.width / self.numpoints)][len(self.avgs[x/(self.model.width / self.numpoints)])-1] = freqs[x] 
+			print self.avgs[x/(self.model.width / self.numpoints)]
+#			raw_input()
+
+			#y = avg
+			y = int(sum(self.avgs[x/(self.model.width / self.numpoints)]) / (len(self.avgs[x/(self.model.width / self.numpoints)])))
+		
+			pygame.draw.circle(screen, freqshow.BUTTON_FG, (x,y), 5, 0)
+			pygame.draw.line(screen, freqshow.BUTTON_FG, (x-(self.model.width / self.numpoints),self.lasty) , (x, y))
+		
+			self.lasty = y
+
 	def render_grid(self, screen):
 		bottom_row  = (self.buttons.row_size, self.model.height-self.buttons.row_size,self.model.width, self.model.height-self.buttons.row_size)
 		for x in range(0, self.model.width, (self.model.width / 10)):
